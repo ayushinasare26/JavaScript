@@ -1,0 +1,285 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #0d9488 0%, #111827 100%);
+  --accent: #14b8a6;
+  --accent-glow: rgba(20, 184, 166, 0.12);
+  --success: #10b981;
+  --success-bg: #f0fdf4;
+  --danger: #f43f5e;
+  --danger-bg: #fff1f2;
+  --bg-surface: #ffffff;
+  --bg-app: #f1f5f9;
+  --text-main: #0f172a;
+  --text-alt: #475569;
+  --border-ui: #e2e8f0;
+  --radius-panel: 20px;
+  --radius-control: 12px;
+  --shadow-panel: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 8px -1px rgba(15, 23, 42, 0.02);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding-bottom: 4rem;
+}
+
+/* Header Section */
+header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 3.5rem 2rem;
+  border-bottom: 4px solid var(--accent);
+  box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.15);
+}
+
+.header-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  color: #94a3b8;
+  max-width: 700px;
+  font-size: 1rem;
+}
+
+/* ── STRECT HORIZONTAL FLEX CONTAINER FOR DESKTOP ── */
+main {
+  max-width: 1650px;
+  margin: 2.5rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Force three columns horizontally side-by-side on desktop views */
+@media (min-width: 1024px) {
+  main {
+    flex-direction: row;
+    align-items: stretch; /* Forces equal height columns */
+  }
+  
+  .dashboard-col {
+    flex: 1; /* Gives every column exactly 33.3% equal width layout */
+    width: 33.33%;
+  }
+}
+
+/* Column Interior Layout Structuring */
+.dashboard-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Balanced Card Containers */
+.panel {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-panel);
+  padding: 2rem;
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Spreads cards to fill column gap heights */
+}
+
+/* Keep structural panels matching layout distributions */
+.panel-fill {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-title-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.panel h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-desc {
+  font-size: 0.85rem;
+  color: var(--text-alt);
+  margin-bottom: 1.25rem;
+  margin-top: -0.5rem;
+}
+
+/* Control Components Mapping */
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-alt);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.control-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-control);
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+textarea {
+  width: 100%;
+  flex-grow: 1; /* Makes textarea stretch to fill horizontal baseline height */
+  min-height: 380px; 
+  padding: 1.1rem 1.25rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-ui);
+  border-radius: var(--radius-control);
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  resize: none;
+  line-height: 1.7;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* Interactive Utility Button */
+.btn-clear {
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-clear:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Badge Layout Controls */
+.validation-badge {
+  position: absolute;
+  right: 12px;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: #e2e8f0;
+  color: var(--text-alt);
+}
+
+.validation-badge.state-valid { background-color: var(--success-bg); color: var(--success); border-color: rgba(16, 185, 129, 0.2); }
+.validation-badge.state-invalid { background-color: var(--danger-bg); color: var(--danger); border-color: rgba(244, 63, 94, 0.2); }
+
+/* Metrics Elements Distribution */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.metric-node {
+  padding: 1.25rem 0.25rem;
+  border-radius: var(--radius-control);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.metric-node.teal-variant { background-color: #f0fdfa; color: #115e59; border-color: #ccfbf1; }
+.metric-node.slate-variant { background-color: #f8fafc; color: #1e293b; border-color: #e2e8f0; }
+.metric-node.emerald-variant { background-color: var(--success-bg); color: #065f46; border-color: #d1fae5; }
+
+.metric-lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; opacity: 0.85; margin-bottom: 0.25rem; }
+.metric-val { font-size: 1.45rem; font-weight: 800; }
+
+/* Extraction Shelves Configuration */
+.extract-block {
+  margin-top: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.extract-shelf {
+  flex-grow: 1;
+  min-height: 140px; 
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  border: 1px dashed var(--border-ui);
+  border-radius: var(--radius-control);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-content: flex-start;
+}
+
+.pill-item {
+  background: #f0fdfa;
+  color: #0f766e;
+  border: 1px solid #99f6e4;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.shelf-empty { color: var(--text-alt); font-style: italic; font-size: 0.85rem; padding: 0.5rem; }
+
+/* Anonymized Terminal Log Visual Alignment */
+.obsidian-console {
+  background-color: #0b0f19;
+  color: #94a3b8;
+  padding: 1.25rem;
+  border-radius: var(--radius-control);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  border: 1px solid #1e293b;
+  line-height: 1.6;
+  flex-grow: 1; /* Automatically expands height match with Column 1 textarea */
+  overflow-y: auto;
+}

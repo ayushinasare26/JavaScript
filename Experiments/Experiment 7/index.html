@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daymark | Todo list</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="shell">
+        <header class="intro">
+            <div>
+                <div class="eyebrow">Daymark / personal list</div>
+                <h1>Make room<br>for today.</h1>
+                <p class="subtitle">A quiet place for the things worth carrying forward.</p>
+            </div>
+            <div>
+                <div class="date" id="today"></div>
+                <div class="prn">PRN 24070521224</div>
+            </div>
+        </header>
+
+        <section class="panel" aria-labelledby="list-title">
+            <h2 id="list-title" class="sr-only">Todo list</h2>
+            <form class="composer" id="todo-form">
+                <label class="sr-only" for="todo-input">Add a todo</label>
+                <input id="todo-input" type="text" placeholder="What needs your attention?" autocomplete="off" maxlength="120" required>
+                <button class="primary" type="submit">Add task</button>
+            </form>
+            <div class="toolbar">
+                <div class="count" id="todo-count">0 tasks</div>
+                <div class="filters" aria-label="Filter tasks">
+                    <button class="filter active" type="button" data-filter="all">All</button>
+                    <button class="filter" type="button" data-filter="active">Open</button>
+                    <button class="filter" type="button" data-filter="done">Completed</button>
+                </div>
+            </div>
+            <ul class="list" id="todo-list"></ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

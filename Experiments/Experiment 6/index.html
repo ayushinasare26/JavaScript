@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Text Processing Platform</title>
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+        <h3>Ayushi Nasare 24070521174</h3>
+      <h1>Text Processing Platform</h1>
+    </div>
+  </header>
+
+  <!-- Horizontal Grid Pipeline Layout -->
+  <main>
+    
+    <!-- COLUMN 1: INTERACTIVE CONTENT INPUTS -->
+    <div class="dashboard-col">
+      <div class="panel">
+        <div class="panel-title-area">
+          <h2>📧 Live Target Validation</h2>
+        </div>
+        <p class="panel-desc">Validates formats against standard compliance definitions.</p>
+        <label for="emailInput">Email Destination Tag</label>
+        <div class="control-wrapper">
+          <input type="text" id="emailInput" placeholder="recipient@domain.com">
+          <div id="emailBadge" class="validation-badge">Waiting...</div>
+        </div>
+      </div>
+
+      <div class="panel panel-fill">
+        <div class="panel-title-area">
+          <h2>📝 Source Corpus Dataset</h2>
+          <button id="clearBtn" class="btn-clear">Clear Input</button>
+        </div>
+        <p class="panel-desc">The analytical engine executes loops as you modify tokens.</p>
+        <textarea id="textInput">Hello! Welcome to our portal. Contact us at support@company.com or sales.dept@business.org for help. 
+Our main contact numbers are +1-555-0199 and +1-555-0123.
+Remember: "Success is not final, failure is not fatal: it is the courage to continue that counts."</textarea>
+      </div>
+    </div>
+
+    <!-- COLUMN 2: REGULAR EXPRESSION PATTERN EXTRACTION CHELVES -->
+    <div class="dashboard-col">
+      <div class="panel" style="height: 100%;">
+        <div class="panel-title-area">
+          <h2>🔍 Algorithmic Pattern Sweeps</h2>
+        </div>
+        <p class="panel-desc">Isolates explicit targets using custom global flags configurations loops syntax.</p>
+        
+        <div class="extract-block">
+          <label>Identified Mail Hubs</label>
+          <div id="extractedEmailsList" class="extract-shelf"></div>
+        </div>
+
+        <div class="extract-block" style="margin-top: 1.5rem;">
+          <label>Parsed Phone Interfaces</label>
+          <div id="extractedPhonesList" class="extract-shelf"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMN 3: ANALYTICS REPORT & MASKED DATA LOGS -->
+    <div class="dashboard-col">
+      <div class="panel">
+        <div class="panel-title-area">
+          <h2>📊 Corpus Metric Report</h2>
+        </div>
+        <p class="panel-desc">Live operational variables mapped dynamically from the source string context.</p>
+        <div class="metrics-row">
+          <div class="metric-node teal-variant">
+            <span class="metric-lbl">Total Words</span>
+            <span id="wordCount" class="metric-val">0</span>
+          </div>
+          <div class="metric-node slate-variant">
+            <span class="metric-lbl">Characters</span>
+            <span id="charCount" class="metric-val">0</span>
+          </div>
+          <div class="metric-node emerald-variant">
+            <span class="metric-lbl">"Success"</span>
+            <span id="keywordCheck" class="metric-val" style="font-size: 1rem; font-weight:700; margin-top:0.35rem;">No</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-fill">
+        <div class="panel-title-area">
+          <h2>🔒 Secured Masked Buffer</h2>
+        </div>
+        <p class="panel-desc">Sensitive email items identified are immediately anonymized in memory.</p>
+        <div id="maskedOutput" class="obsidian-console"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
