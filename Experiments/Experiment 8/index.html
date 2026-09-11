@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Forge Gym | Live the Movement</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette: Electric Citrus */
+            --bg-gradient-start: #e0f7fa;
+            --bg-gradient-end: #f3e5f5;
+            
+            --card-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #6b7280;
+            
+            --primary-neon: #C6FF00; /* Lime Green */
+            --primary-dark: #82b100;
+            --accent-blue: #2979ff;
+            --error-red: #ff1744;
+            
+            --font-main: 'Outfit', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            font-family: var(--font-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .energy-card {
+            width: 100%;
+            max-width: 460px;
+            padding: 45px 40px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.05),
+                0 1px 3px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Top Blob */
+        .energy-card::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: var(--primary-neon);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        /* Header */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-header h1 {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, #1a1a1a, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-header p {
+            font-size: 14px;
+            color: var(--accent-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Form Groups */
+        .input-group {
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        input, select {
+            width: 100%;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            padding: 14px 18px;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input::placeholder, select::placeholder { color: #adb5bd; }
+
+        /* Focus State */
+        input:focus, select:focus {
+            background: #fff;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(41, 121, 255, 0.1);
+        }
+
+        /* Validation States */
+        .input-group.valid label { color: var(--primary-dark); }
+        .input-group.valid input, 
+        .input-group.valid select {
+            border-color: var(--primary-neon);
+            background: #fcfff0;
+        }
+
+        .input-group.invalid label { color: var(--error-red); }
+        .input-group.invalid input, 
+        .input-group.invalid select {
+            border-color: var(--error-red);
+            background: #fff5f5;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .feedback-msg {
+            font-size: 11px;
+            margin-top: 6px;
+            height: 16px;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .input-group.invalid .feedback-msg {
+            opacity: 1; transform: translateY(0); color: var(--error-red);
+        }
+        .input-group.valid .feedback-msg {
+            opacity: 1; transform: translateY(0); color: var(--primary-dark);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            margin-top: 10px;
+            background: var(--primary-neon);
+            border: none;
+            color: #000;
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(198, 255, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(198, 255, 0, 0.4);
+            background: #d4ff33;
+        }
+
+        .submit-btn:active:not(:disabled) { transform: translateY(-1px); }
+
+        .submit-btn:disabled {
+            background: #e9ecef;
+            color: #adb5bd;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Custom Select Arrow */
+        select { appearance: none; cursor: pointer; }
+        .select-wrapper { position: relative; }
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 18px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="energy-card">
+    <div class="brand-header">
+        <h1>The Forge Gym</h1>
+        <p>Live Your Potential</p>
+    </div>
+
+    <form id="gymForm" novalidate>
+        
+        <!-- Full Name -->
+        <div class="input-group" id="nameGroup">
+            <label for="fullName">Athlete Name</label>
+            <input type="text" id="fullName" placeholder="What should we call you?" autocomplete="off">
+            <div class="feedback-msg" id="nameMsg">Waiting...</div>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group" id="emailGroup">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="off">
+            <div class="feedback-msg" id="emailMsg">Invalid email format.</div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="input-group" id="mobileGroup">
+            <label for="mobile">Phone Number</label>
+            <input type="tel" id="mobile" placeholder="10-digit number" maxlength="10" autocomplete="off">
+            <div class="feedback-msg" id="mobileMsg">Must be exactly 10 digits.</div>
+        </div>
+
+        <!-- Age -->
+        <div class="input-group" id="ageGroup">
+            <label for="age">Your Age</label>
+            <input type="number" id="age" placeholder="Min age: 14" min="14" max="100">
+            <div class="feedback-msg" id="ageMsg">Age must be 14-100.</div>
+        </div>
+
+        <!-- Plan -->
+        <div class="input-group" id="planGroup">
+            <label for="plan">Membership Tier</label>
+            <div class="select-wrapper">
+                <select id="plan">
+                    <option value="">-- Choose Your Path --</option>
+                    <option value="starter">Starter Spark</option>
+                    <option value="pro">Pro Ignition</option>
+                    <option value="elite">Elite Voltage</option>
+                </select>
+            </div>
+            <div class="feedback-msg" id="planMsg">Please select a tier.</div>
+        </div>
+
+        <button type="submit" id="submitBtn" disabled>START MY JOURNEY</button>
+    </form>
+</div>
+
+<script>
+    // ==========================================
+    // 1. ACCESS ELEMENTS
+    // ==========================================
+    const form = document.getElementById('gymForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const fields = {
+        name: { 
+            el: document.getElementById('fullName'), 
+            grp: document.getElementById('nameGroup'),
+            msg: document.getElementById('nameMsg'),
+            check: v => v.trim().length >= 3,
+            successTxt: "Name looks great!",
+            errorTxt: "At least 3 characters needed."
+        },
+        email: { 
+            el: document.getElementById('email'), 
+            grp: document.getElementById('emailGroup'),
+            msg: document.getElementById('emailMsg'),
+            check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+            successTxt: "Email verified.",
+            errorTxt: "Please enter a valid email."
+        },
+        mobile: { 
+            el: document.getElementById('mobile'), 
+            grp: document.getElementById('mobileGroup'),
+            msg: document.getElementById('mobileMsg'),
+            check: v => /^\d{10}$/.test(v.trim()),
+            successTxt: "Number confirmed.",
+            errorTxt: "Exactly 10 digits required."
+        },
+        age: { 
+            el: document.getElementById('age'), 
+            grp: document.getElementById('ageGroup'),
+            msg: document.getElementById('ageMsg'),
+            check: v => { const n = parseInt(v); return !isNaN(n) && n >= 14 && n <= 100; },
+            successTxt: "Age valid.",
+            errorTxt: "Must be between 14 and 100."
+        },
+        plan: { 
+            el: document.getElementById('plan'), 
+            grp: document.getElementById('planGroup'),
+            msg: document.getElementById('planMsg'),
+            check: v => v !== "",
+            successTxt: "Tier selected!",
+            errorTxt: "Selection required."
+        }
+    };
+
+    // ==========================================
+    // 2. VALIDATION LOGIC
+    // ==========================================
+    function validateField(key) {
+        const f = fields[key];
+        const val = f.el.value;
+        const isValid = f.check(val);
+        const isEmpty = val === "" || (key === 'plan' && val === "");
+
+        f.grp.classList.remove('valid', 'invalid');
+
+        if (isEmpty) {
+            f.msg.textContent = key === 'plan' ? f.errorTxt : "Waiting...";
+            f.msg.style.color = "var(--text-muted)";
+            return false;
+        }
+
+        if (isValid) {
+            f.grp.classList.add('valid');
+            f.msg.textContent = f.successTxt;
+            return true;
+        } else {
+            f.grp.classList.add('invalid');
+            f.msg.textContent = f.errorTxt;
+            return false;
+        }
+    }
+
+    function updateSubmitState() {
+        const allValid = Object.keys(fields).every(k => fields[k].check(fields[k].el.value));
+        submitBtn.disabled = !allValid;
+    }
+
+    // ==========================================
+    // 3. EVENT LISTENERS (LIVE CHECKS)
+    // ==========================================
+    Object.keys(fields).forEach(key => {
+        const f = fields[key];
+        
+        f.el.addEventListener('input', () => {
+            if (key === 'mobile') f.el.value = f.el.value.replace(/\D/g, '');
+            validateField(key);
+            updateSubmitState();
+        });
+
+        f.el.addEventListener('blur', () => {
+            validateField(key);
+            updateSubmitState();
+        });
+    });
+
+    // ==========================================
+    // 4. SUBMIT HANDLER
+    // ==========================================
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let valid = true;
+        Object.keys(fields).forEach(k => {
+            if (!validateField(k)) valid = false;
+        });
+
+        if (valid) {
+            submitBtn.innerHTML = "WELCOME TO The Forge! ⚡";
+            submitBtn.style.background = "#000";
+            submitBtn.style.color = "#fff";
+            
+            setTimeout(() => {
+                alert(`⚡ LET'S GO ${fields.name.el.value.toUpperCase()}!\n\nYour journey starts now.`);
+                form.reset();
+                Object.values(fields).forEach(f => {
+                    f.grp.classList.remove('valid', 'invalid');
+                    f.msg.textContent = "Waiting...";
+                    f.msg.style.color = "var(--text-muted)";
+                });
+                submitBtn.innerHTML = "START MY JOURNEY";
+                submitBtn.style.background = "";
+                submitBtn.style.color = "";
+                submitBtn.disabled = true;
+            }, 800);
+        }
+    });
+</script>
+
+</body>
+</html> 
