@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Job Application Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Ayushi Nasare   24070521174</h2>
+        <h1>🚀 Career Application Portal</h1>
+        <p class="subtitle">Join our team! Complete this form and we'll get back to you shortly.</p>
+        
+        <form id="jobApplicationForm" novalidate>
+            <!-- Personal Information Section -->
+            <section class="form-section">
+                <h2>👤 Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender <span class="required">*</span></label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="e.g., +1234567890" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address <span class="required">*</span></label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City <span class="required">*</span></label>
+                    <input type="text" id="city" name="city" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State <span class="required">*</span></label>
+                    <input type="text" id="state" name="state" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pinCode">PIN Code <span class="required">*</span></label>
+                    <input type="text" id="pinCode" name="pinCode" required>
+                    <span class="error-message"></span>
+                </div>
+            </section>
+
+            <!-- Educational Qualification Section -->
+            <section class="form-section">
+                <h2>🎓 Educational Qualification</h2>
+                
+                <div class="form-group">
+                    <label for="highestQualification">Highest Qualification <span class="required">*</span></label>
+                    <select id="highestQualification" name="highestQualification" required>
+                        <option value="">Select Qualification</option>
+                        <option value="high-school">High School</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="bachelors">Bachelor's Degree</option>
+                        <option value="masters">Master's Degree</option>
+                        <option value="phd">PhD</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="university">University / Institute <span class="required">*</span></label>
+                    <input type="text" id="university" name="university" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="passingYear">Passing Year <span class="required">*</span></label>
+                    <input type="number" id="passingYear" name="passingYear" min="1950" max="2026" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="percentage">Percentage / CGPA <span class="required">*</span></label>
+                    <input type="text" id="percentage" name="percentage" placeholder="e.g., 85% or 8.5 CGPA" required>
+                    <span class="error-message"></span>
+                </div>
+            </section>
+
+            <!-- Professional Information Section -->
+            <section class="form-section">
+                <h2>💼 Professional Information</h2>
+                
+                <div class="form-group">
+                    <label for="jobPosition">Applying For / Job Position <span class="required">*</span></label>
+                    <input type="text" id="jobPosition" name="jobPosition" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="workExperience">Total Work Experience (in years) <span class="required">*</span></label>
+                    <input type="number" id="workExperience" name="workExperience" min="0" max="50" step="0.5" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="currentOrganization">Current/Previous Organization</label>
+                    <input type="text" id="currentOrganization" name="currentOrganization">
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="currentDesignation">Current Designation</label>
+                    <input type="text" id="currentDesignation" name="currentDesignation">
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="expectedSalary">Expected Salary <span class="required">*</span></label>
+                    <input type="text" id="expectedSalary" name="expectedSalary" placeholder="e.g., $50,000" required>
+                    <span class="error-message"></span>
+                </div>
+            </section>
+
+            <!-- Technical Skills Section -->
+            <section class="form-section">
+                <h2>⚡ Technical Skills</h2>
+                
+                <div class="form-group">
+                    <label for="programmingLanguages">Programming Languages <span class="required">*</span></label>
+                    <input type="text" id="programmingLanguages" name="programmingLanguages" placeholder="e.g., JavaScript, Python, Java" required>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="technicalSkills">Technical Skills <span class="required">*</span></label>
+                    <textarea id="technicalSkills" name="technicalSkills" rows="3" placeholder="List your technical skills" required></textarea>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="certifications">Certifications</label>
+                    <textarea id="certifications" name="certifications" rows="2" placeholder="List any relevant certifications"></textarea>
+                    <span class="error-message"></span>
+                </div>
+            </section>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit">Submit Application</button>
+                <button type="reset" class="btn-reset">Reset Form</button>
+            </div>
+        </form>
+
+        <div id="successMessage" class="success-message hidden">
+            <h3>🎉 Application Submitted Successfully!</h3>
+            <p>Thank you for your interest! Our HR team will review your application and contact you within 3-5 business days.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling in JavaScript - Case Study</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Event Handling in JavaScript</h1>
+        
+        <p class="subtitle">Form Elements, Validation & Events Demo</p>
+
+        <form id="userForm" novalidate>
+            <!-- Name Field -->
+            <div class="form-group">
+                <h2>Ayushi Nasare     24070521174</h2>
+                <label for="name">Full Name: <span class="required">*</span></label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter your full name"
+                    required
+                >
+                <span class="error-message" id="nameError"></span>
+                <span class="success-message" id="nameSuccess"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+                <label for="email">Email Address: <span class="required">*</span></label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="example@email.com"
+                    required
+                >
+                <span class="error-message" id="emailError"></span>
+                <span class="success-message" id="emailSuccess"></span>
+            </div>
+
+            <!-- Phone Field -->
+            <div class="form-group">
+                <label for="phone">Phone Number: <span class="required">*</span></label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="123-456-7890"
+                    required
+                >
+                <span class="error-message" id="phoneError"></span>
+                <span class="success-message" id="phoneSuccess"></span>
+            </div>
+
+            <!-- Age Field -->
+            <div class="form-group">
+                <label for="age">Age: <span class="required">*</span></label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    name="age" 
+                    placeholder="Enter your age"
+                    min="18"
+                    max="100"
+                    required
+                >
+                <span class="error-message" id="ageError"></span>
+                <span class="success-message" id="ageSuccess"></span>
+            </div>
+
+            <!-- Gender Selection -->
+            <div class="form-group">
+                <label>Gender: <span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="gender" value="male" required>
+                        Male
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="gender" value="female" required>
+                        Female
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="gender" value="other" required>
+                        Other
+                    </label>
+                </div>
+                <span class="error-message" id="genderError"></span>
+            </div>
+
+            <!-- Country Selection -->
+            <div class="form-group">
+                <label for="country">Country: <span class="required">*</span></label>
+                <select id="country" name="country" required>
+                    <option value="">-- Select Country --</option>
+                    <option value="usa">United States</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="canada">Canada</option>
+                    <option value="australia">Australia</option>
+                    <option value="india">India</option>
+                    <option value="other">Other</option>
+                </select>
+                <span class="error-message" id="countryError"></span>
+                <span class="success-message" id="countrySuccess"></span>
+            </div>
+
+            <!-- Interests -->
+            <div class="form-group">
+                <label>Interests:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests" value="coding">
+                        Coding
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests" value="design">
+                        Design
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests" value="music">
+                        Music
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="interests" value="sports">
+                        Sports
+                    </label>
+                </div>
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea 
+                    id="message" 
+                    name="message" 
+                    rows="4" 
+                    placeholder="Enter your message here..."
+                ></textarea>
+                <span class="char-count" id="charCount">0 characters</span>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="form-group">
+                <label class="checkbox-label terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    I agree to the Terms and Conditions <span class="required">*</span>
+                </label>
+                <span class="error-message" id="termsError"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" id="submitBtn">Submit Form</button>
+                <button type="reset" id="resetBtn">Reset Form</button>
+            </div>
+        </form>
+
+        <!-- Event Log -->
+        <div class="event-log">
+            <h2>Event Log</h2>
+            <button id="clearLog">Clear Log</button>
+            <div id="logContainer"></div>
+        </div>
+
+        <!-- Submitted Data Display -->
+        <div id="submittedData" class="submitted-data" style="display: none;">
+            <h2>Submitted Form Data</h2>
+            <div id="dataDisplay"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
