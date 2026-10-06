@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Student Event Registry</title>
+  <style>
+    /* --- Modern UI CSS Variable Settings --- */
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --card-border: 1px solid #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --input-border: #cbd5e1;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      
+      --yet-color: #0284c7;
+      --yet-bg: #f0f9ff;
+      --reg-color: #16a34a;
+      --reg-bg: #f0fdf4;
+      --not-color: #dc2626;
+      --not-bg: #fef2f2;
+
+      --theme-btn-bg: #ffffff;
+      --theme-btn-border: #cbd5e1;
+      --theme-btn-text: #0f172a;
+    }
+
+    body.dark-mode {
+      --bg: #0b0f19;
+      --card: #161e2e;
+      --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      --card-border: 1px solid #243048;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-border: #374151;
+      --accent: #818cf8;
+      --accent-hover: #6366f1;
+      
+      --yet-color: #38bdf8;
+      --yet-bg: rgba(2, 132, 199, 0.15);
+      --reg-color: #4ade80;
+      --reg-bg: rgba(22, 163, 74, 0.15);
+      --not-color: #f87171;
+      --not-bg: rgba(220, 38, 38, 0.15);
+
+      --theme-btn-bg: #1f2937;
+      --theme-btn-border: #374151;
+      --theme-btn-text: #f8fafc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding: 30px 20px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    header { 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    
+    .header-info h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .header-info p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .theme-toggle {
+      background: var(--theme-btn-bg);
+      color: var(--theme-btn-text);
+      border: 1px solid var(--theme-btn-border);
+      padding: 8px 16px;
+      border-radius: 99px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .control-panel {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      border: var(--card-border);
+      height: fit-content;
+    }
+
+    .control-panel h2 { font-size: 1.2rem; margin-bottom: 20px; font-weight: 700; }
+
+    .form-group { display: flex; flex-direction: column; margin-bottom: 16px; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; color: var(--text-muted); text-transform: uppercase; }
+    
+    .form-group input, .form-group select {
+      padding: 10px 12px;
+      border: 1px solid var(--input-border);
+      background-color: var(--card);
+      color: var(--text);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
+
+    .btn-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+
+    .btn {
+      padding: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+    .btn-secondary:hover { background: rgba(99, 102, 241, 0.05); }
+
+    .dashboard-area { display: flex; flex-direction: column; gap: 20px; }
+
+    .search-wrapper {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--card-shadow);
+      border: var(--card-border);
+    }
+    .search-wrapper input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--input-border);
+      background-color: var(--bg);
+      color: var(--text);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .search-wrapper input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+
+    .table-container {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      border: var(--card-border);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(0, 0, 0, 0.02);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    body.dark-mode th { background: rgba(255, 255, 255, 0.02); }
+
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .status-select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid transparent;
+      outline: none;
+      cursor: pointer;
+    }
+    .status-select.yet { background-color: var(--yet-bg); color: var(--yet-color); }
+    .status-select.registered { background-color: var(--reg-bg); color: var(--reg-color); }
+    .status-select.not { background-color: var(--not-bg); color: var(--not-color); }
+
+    .delete-btn {
+      background: transparent;
+      border: none;
+      color: var(--not-color);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .delete-btn:hover { text-decoration: underline; }
+
+    .empty-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-info">
+        <h1>Campus Registry Dashboard</h1>
+        <p>Manage real-time student registration profiles and query operational system data records.</p>
+      </div>
+      <button class="theme-toggle" id="themeToggleBtn">🌙 Dark Mode</button>
+    </header>
+
+    <div class="grid-layout">
+      <!-- PANEL 1: Input Controls -->
+      <div class="control-panel">
+        <h2>Registry Controls</h2>
+        
+        <div class="form-group">
+          <label for="reg-name">Student Full Name</label>
+          <input type="text" id="reg-name" placeholder="e.g. Mehul Sharma" />
+        </div>
+        
+        <div class="form-group">
+          <label for="reg-prn">PRN / Roll Number</label>
+          <input type="text" id="reg-prn" placeholder="e.g. 7094561231" />
+        </div>
+        
+        <div class="form-group">
+          <label for="reg-dept">Department</label>
+          <select id="reg-dept">
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Mechanical">Mechanical</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-year">Academic Year</label>
+          <select id="reg-year">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-event">Target Campus Event</label>
+          <select id="reg-event">
+            <option value="National Hackathon 2026">National Hackathon 2026</option>
+            <option value="UI/UX Design Masterclass">UI/UX Design Masterclass</option>
+            <option value="AI Symposium 2026">AI Symposium 2026</option>
+            <option value="Cybersecurity Boot Camp">Cybersecurity Boot Camp</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-status">Registration State</label>
+          <select id="reg-status">
+            <option value="yet">Yet to Register</option>
+            <option value="registered">Registered</option>
+            <option value="not">Not Registered</option>
+          </select>
+        </div>
+
+        <div class="btn-stack">
+          <button type="button" class="btn btn-primary" onclick="addRegistration()">Add Student Record</button>
+          <button type="button" class="btn btn-secondary" onclick="loadMockData()">Load Student Data</button>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Records Dashboard View -->
+      <div class="dashboard-area">
+        <div class="search-wrapper">
+          <!-- Text Box set to "Rahul" to mimic your screenshot search -->
+          <input type="text" id="searchBox" oninput="renderRegistryTable()" value="Rahul" placeholder="🔍 Search records by Student Name, PRN, Department or Event..." />
+        </div>
+
+        <div class="table-container">
+          <table id="registryTable">
+            <thead>
+              <tr>
+                <th>Student Details</th>
+                <th>PRN Status</th>
+                <th>Department / Year</th>
+                <th>Target Event Name</th>
+                <th>Registration Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>

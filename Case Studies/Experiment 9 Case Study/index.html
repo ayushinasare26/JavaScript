@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Palindrome Checker</title>
+    <style>
+        /* --- Standard Theme Variables --- */
+        :root {
+            --bg-color: #f1f5f9;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: #ffffff;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --card-border: 1px solid #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
+            --input-focus: #4f46e5;
+            --btn-bg: #4f46e5;
+            --btn-text: #ffffff;
+            --theme-btn-bg: #f8fafc;
+            --theme-btn-text: #4f46e5;
+            --theme-btn-border: 1px solid #e2e8f0;
+            --result-bg: #f0fdf4;
+            --result-border: #bbf7d0;
+            --result-text: #166534;
+            --error-bg: #fef2f2;
+            --error-border: #fecaca;
+            --error-text: #991b1b;
+        }
+
+        /* --- Force Dark Mode Theme Classes --- */
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: #1e293b;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            --card-border: 1px solid #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --input-bg: #0f172a;
+            --input-border: #334155;
+            --input-focus: #818cf8;
+            --btn-bg: #6366f1;
+            --btn-text: #ffffff;
+            --theme-btn-bg: #334155;
+            --theme-btn-text: #f8fafc;
+            --theme-btn-border: 1px solid #475569;
+            --result-bg: rgba(22, 101, 52, 0.2);
+            --result-border: #22c55e;
+            --result-text: #86efac;
+            --error-bg: rgba(153, 27, 27, 0.2);
+            --error-border: #ef4444;
+            --error-text: #fca5a5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: var(--card-border);
+            padding: 35px 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .theme-toggle {
+            background: var(--theme-btn-bg);
+            color: var(--theme-btn-text);
+            border: var(--theme-btn-border);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--input-focus);
+        }
+
+        button.action-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button.action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .output-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .output-box.success {
+            background-color: var(--result-bg);
+            border: 1px solid var(--result-border);
+            color: var(--result-text);
+        }
+
+        .output-box.error {
+            background-color: var(--error-bg);
+            border: 1px solid var(--error-border);
+            color: var(--error-text);
+        }
+
+        .status-badge {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="header-area">
+            <h1>Palindrome Checker</h1>
+            <button class="theme-toggle" id="themeToggleBtn">🌙 Dark Mode</button>
+        </div>
+        
+        <div class="input-group">
+            <label for="textInput">Enter a word or phrase to check</label>
+            <input type="text" id="textInput" placeholder="e.g., Radar or Madam">
+        </div>
+        
+        <button class="action-btn" id="checkBtn">Check Status</button>
+        
+        <div class="output-box" id="resultOutput"></div>
+    </div>
+
+    <script>
+        // --- Core Checker Function Engine ---
+        function createPalindromeChecker() { 
+            var searchHistory = []; 
+            return function(input) { 
+                try { 
+                    if (typeof input !== 'string') { 
+                        throw new TypeError('Input must be a string.'); 
+                    } 
+                    if (!input.replace(/^\s+|\s+$/g, '')) { 
+                        throw new Error('Input cannot be empty.'); 
+                    } 
+                    
+                    // Core Palindrome Evaluation
+                    var cleaned = input.toLowerCase().replace(/[^a-z0-9]/g, ''); 
+                    var reversed = cleaned.split('').reverse().join(''); 
+                    var isPalindrome = cleaned === reversed; 
+                    
+                    searchHistory.push({ original: input, result: isPalindrome }); 
+                    
+                    return {
+                        error: false,
+                        message: isPalindrome ? "✨ Excellent! That is a perfect palindrome." : "❌ Not a palindrome. Try another word!",
+                        count: searchHistory.length
+                    };
+                } catch (error) { 
+                    return {
+                        error: true,
+                        message: "⚠️ " + error.message,
+                        count: searchHistory.length
+                    }; 
+                } 
+            }; 
+        } 
+
+        // Initialize instance
+        var checkPalindrome = createPalindromeChecker();
+
+        // --- View Elements ---
+        var textInput = document.getElementById('textInput');
+        var checkBtn = document.getElementById('checkBtn');
+        var resultOutput = document.getElementById('resultOutput');
+        var themeToggleBtn = document.getElementById('themeToggleBtn');
+
+        // --- Run Status Checks ---
+        function handleCheck() {
+            var userInput = textInput.value;
+            var data = checkPalindrome(userInput);
+            
+            resultOutput.style.display = 'block';
+            
+            if (data.error) {
+                resultOutput.className = 'output-box error';
+                resultOutput.innerHTML = '<div>' + data.message + '</div>';
+            } else {
+                resultOutput.className = 'output-box success';
+                resultOutput.innerHTML = '<div>' + data.message + '</div>' + 
+                                         '<div class="status-badge">Search Session Counter: ' + data.count + '</div>';
+            }
+        }
+
+        // Action Bindings
+        checkBtn.onclick = handleCheck;
+        textInput.onkeypress = function(e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                handleCheck();
+            }
+        };
+
+        // --- Solid Theme Click Engine ---
+        themeToggleBtn.onclick = function() {
+            var bodyElement = document.body;
+            if (bodyElement.classList.contains('dark-mode')) {
+                bodyElement.classList.remove('dark-mode');
+                themeToggleBtn.textContent = '🌙 Dark Mode';
+            } else {
+                bodyElement.classList.add('dark-mode');
+                themeToggleBtn.textContent = '☀️ Light Mode';
+            }
+        };
+    </script>
+</body>
+</html>
